@@ -15,7 +15,7 @@ Experience the application live:
 
 ### Demo Credentials
 **Admin Dashboard Access:**
-- Email: `admin@hospital.com`
+- Email: `admin@medcare.com`
 - Password: `1st row of qwerty keyboard`
   
 ## 🌟 Features
