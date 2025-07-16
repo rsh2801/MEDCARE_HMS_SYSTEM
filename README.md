@@ -3,6 +3,21 @@
 
 A comprehensive full-stack hospital management system built with the MERN stack (MongoDB, Express.js, React.js, Node.js). This system provides three main interfaces: a patient portal (frontend), an admin dashboard, and a robust backend API.
 
+
+## 🌍 Live Demo
+
+Experience the application live:
+
+| Component | Link | Description |
+|-----------|------|-------------|
+| 🏥 **Patient Portal** | [View Live Demo](https://medcare-hms-rs.netlify.app/) | Public interface for patients to book appointments and register |
+| 🔧 **Admin Dashboard** | [View Live Demo](https://medcare-hms-rs-admin.netlify.app/) | Administrative panel for 
+
+### Demo Credentials
+**Admin Dashboard Access:**
+- Email: `admin@hospital.com`
+- Password: `1st row of qwerty keyboard`
+  
 ## 🌟 Features
 
 ### 👨‍⚕️ Patient Portal (Frontend)
@@ -87,31 +102,6 @@ hospital/
 - MongoDB (local or cloud instance)
 - Git
 
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd hospital
-   ```
-
-2. **Setup Backend**
-   ```bash
-   cd backend
-   npm install
-   ```
-
-3. **Setup Frontend**
-   ```bash
-   cd ../frontend
-   npm install
-   ```
-
-4. **Setup Dashboard**
-   ```bash
-   cd ../dashboard
-   npm install
-   ```
 
 ### Environment Configuration
 
@@ -221,11 +211,4 @@ DASHBOARD_URL=http://localhost:5174
 - **CORS Configuration**: Cross-origin resource sharing setup
 - **Error Handling**: Secure error responses
 - **Role-based Access**: Different access levels for users
-
-## 🌐 Deployment
-
-The project includes Netlify configuration files for easy deployment:
-- Frontend: Configured with `netlify.toml`
-- Dashboard: Configured with `netlify.toml`
-- Backend: Can be deployed on services like Heroku, Vercel, or DigitalOcean
 
