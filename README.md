@@ -1,4 +1,4 @@
-# MEDCARE_HMS_SYSTEM
+
 # 🏥 MedCare Hospital Management System
 
 A comprehensive full-stack hospital management system built with the MERN stack (MongoDB, Express.js, React.js, Node.js). This system provides three main interfaces: a patient portal (frontend), an admin dashboard, and a robust backend API.
