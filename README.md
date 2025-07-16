@@ -129,7 +129,7 @@ DASHBOARD_URL=http://localhost:5174
    cd backend
    npm start
    ```
-   Server runs on `http://localhost:4000`
+   Server runs on `http://localhost:5000`
 
 2. **Start the Frontend (Patient Portal)**
    ```bash
@@ -144,71 +144,3 @@ DASHBOARD_URL=http://localhost:5174
    npm run dev
    ```
    Dashboard runs on `http://localhost:5174`
-
-## 📊 Database Schema
-
-### User Schema
-- Personal information (name, email, phone, NIC)
-- Role-based access (Patient, Doctor, Admin)
-- Authentication credentials
-- Profile avatars
-
-### Appointment Schema
-- Patient and doctor information
-- Appointment date and time
-- Department and status tracking
-- Contact details
-
-### Message Schema
-- Contact form submissions
-- Patient inquiries
-- Message status tracking
-
-## 🔑 API Endpoints
-
-### Authentication
-- `POST /api/v1/user/patient/register` - Register patient
-- `POST /api/v1/user/login` - User login
-- `POST /api/v1/user/logout` - User logout
-
-### User Management
-- `GET /api/v1/user/admin/me` - Get admin profile
-- `GET /api/v1/user/doctors` - Get all doctors
-- `POST /api/v1/user/doctor/addnew` - Add new doctor
-
-### Appointments
-- `POST /api/v1/appointment/post` - Book appointment
-- `GET /api/v1/appointment/getall` - Get all appointments
-- `PUT /api/v1/appointment/update/:id` - Update appointment
-
-### Messages
-- `POST /api/v1/message/send` - Send message
-- `GET /api/v1/message/getall` - Get all messages
-
-## 🎨 Features in Detail
-
-### Patient Portal Features
-- **Home Page**: Hero section with hospital information
-- **About Us**: Hospital details and mission
-- **Departments**: Medical specialties showcase
-- **Appointment Booking**: Interactive appointment form
-- **User Registration**: Secure patient registration
-- **Responsive Design**: Mobile-optimized interface
-
-### Admin Dashboard Features
-- **Dashboard Overview**: System statistics and metrics
-- **Doctor Management**: Add and manage medical staff
-- **Patient Management**: View and manage patient records
-- **Appointment Management**: Schedule and track appointments
-- **Message Center**: Handle patient communications
-- **Admin Controls**: System administration tools
-
-## 🔒 Security Features
-
-- **JWT Authentication**: Secure token-based authentication
-- **Password Hashing**: Bcrypt encryption for passwords
-- **Input Validation**: Comprehensive data validation
-- **CORS Configuration**: Cross-origin resource sharing setup
-- **Error Handling**: Secure error responses
-- **Role-based Access**: Different access levels for users
-
