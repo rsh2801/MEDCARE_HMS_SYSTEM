@@ -137,7 +137,7 @@ DASHBOARD_URL=http://localhost:5174
 1. **Start the Backend Server**
    ```bash
    cd backend
-   npm run dev
+   npm start
    ```
    Server runs on `http://localhost:4000`
 
