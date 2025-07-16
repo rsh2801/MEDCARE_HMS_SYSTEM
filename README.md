@@ -11,7 +11,7 @@ Experience the application live:
 | Component | Link | Description |
 |-----------|------|-------------|
 | 🏥 **Patient Portal** | [View Live Demo](https://medcare-hms-rs.netlify.app/) | Public interface for patients to book appointments and register |
-| 🔧 **Admin Dashboard** | [View Live Demo](https://medcare-hms-rs-admin.netlify.app/) | Administrative panel for 
+| 🔧 **Admin Dashboard** | [View Live Demo](https://medcare-hms-rs-admin.netlify.app/) | Administrative panel  
 
 ### Demo Credentials
 **Admin Dashboard Access:**
