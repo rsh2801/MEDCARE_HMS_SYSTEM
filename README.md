@@ -10,7 +10,7 @@ A comprehensive full-stack hospital management system built with the MERN stack 
 - **Appointment Booking**: Schedule appointments with doctors
 - **Department Information**: Browse available medical departments
 - **Contact & Messaging**: Send messages and inquiries
-- **Responsive Design**: Modern, mobile-friendly interface
+
 
 ### 🔧 Admin Dashboard
 - **User Management**: Manage patients, doctors, and admin accounts
@@ -229,10 +229,3 @@ The project includes Netlify configuration files for easy deployment:
 - Dashboard: Configured with `netlify.toml`
 - Backend: Can be deployed on services like Heroku, Vercel, or DigitalOcean
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
