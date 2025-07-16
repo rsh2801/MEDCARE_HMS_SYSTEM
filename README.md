@@ -18,29 +18,6 @@ Experience the application live:
 - Email: `admin@medcare.com`
 - Password: `1st row of qwerty keyboard`
   
-## 🌟 Features
-
-### 👨‍⚕️ Patient Portal (Frontend)
-- **Patient Registration & Login**: Secure authentication system
-- **Appointment Booking**: Schedule appointments with doctors
-- **Department Information**: Browse available medical departments
-- **Contact & Messaging**: Send messages and inquiries
-
-
-### 🔧 Admin Dashboard
-- **User Management**: Manage patients, doctors, and admin accounts
-- **Doctor Registration**: Add new doctors to the system
-- **Appointment Management**: View and manage all appointments
-- **Message Center**: Handle patient inquiries and messages
-- **Analytics Dashboard**: Overview of system statistics
-
-### 🔐 Backend API
-- **RESTful API**: Clean and organized API endpoints
-- **JWT Authentication**: Secure token-based authentication
-- **MongoDB Integration**: Robust database operations
-- **File Upload**: Support for document and image uploads (Cloudinary)
-- **Error Handling**: Comprehensive error management
-- **Input Validation**: Data validation and sanitization
 
 ## 🛠️ Technology Stack
 
