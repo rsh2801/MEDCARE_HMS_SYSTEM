@@ -11,6 +11,7 @@ A full-stack hospital management system built with the MERN stack featuring thre
 |--------|------|
 | Patient Portal | [medcare-hms-rs.netlify.app](https://medcare-hms-rs.netlify.app/) |
 | Admin Dashboard | [medcare-hms-rs-admin.netlify.app](https://medcare-hms-rs-admin.netlify.app/) |
+| Doctor Dashboard | [medcare-hms-rs-admin.netlify.app](https://medcare-hms-rs-admin.netlify.app/) |
 
 **Admin Login:** `admin@medcare.com` / `qwertyuiop`
 
