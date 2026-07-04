@@ -1,0 +1,29 @@
+/* Minimal overrides for react-multi-carousel */
+.react-multi-carousel-dot button {
+  border-color: #14b8a6 !important;
+}
+.react-multi-carousel-dot--active button {
+  background: #14b8a6 !important;
+}
+.react-multiple-carousel__arrow {
+  background: rgba(20, 184, 166, 0.8) !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+}
+.react-multiple-carousel__arrow:hover {
+  background: rgba(13, 148, 136, 1) !important;
+}
+
+/* Dark mode variants */
+.dark .react-multi-carousel-dot button {
+  border-color: #2dd4bf !important;
+}
+.dark .react-multi-carousel-dot--active button {
+  background: #2dd4bf !important;
+}
+.dark .react-multiple-carousel__arrow {
+  background: rgba(45, 212, 191, 0.7) !important;
+}
+.dark .react-multiple-carousel__arrow:hover {
+  background: rgba(45, 212, 191, 1) !important;
+}

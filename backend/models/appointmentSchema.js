@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { Mongoose } from "mongoose";
 import validator from "validator";
+import { TIME_SLOTS } from "../constants/timeSlots.js";
 
 const appointmentSchema = new mongoose.Schema({
   firstName: {
@@ -21,14 +21,14 @@ const appointmentSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: [true, "Phone Is Required!"],
-    minLength: [11, "Phone Number Must Contain Exact 11 Digits!"],
-    maxLength: [11, "Phone Number Must Contain Exact 11 Digits!"],
+    minLength: [10, "Phone Number Must Contain Exact 10 Digits!"],
+    maxLength: [10, "Phone Number Must Contain Exact 10 Digits!"],
   },
-  nic: {
+  aadhaar: {
     type: String,
-    required: [true, "NIC Is Required!"],
-    minLength: [13, "NIC Must Contain Only 13 Digits!"],
-    maxLength: [13, "NIC Must Contain Only 13 Digits!"],
+    required: [true, "Aadhaar Is Required!"],
+    minLength: [12, "Aadhaar Must Contain Exact 12 Digits!"],
+    maxLength: [12, "Aadhaar Must Contain Exact 12 Digits!"],
   },
   dob: {
     type: Date,
@@ -74,11 +74,24 @@ const appointmentSchema = new mongoose.Schema({
     ref: "User",
     required: [true, "Patient Id Is Required!"],
   },
+  timeSlot: {
+    type: String,
+    required: [true, "Time Slot Is Required!"],
+    enum: {
+      values: TIME_SLOTS,
+      message: "Invalid Time Slot!",
+    },
+  },
   status: {
     type: String,
     enum: ["Pending", "Accepted", "Rejected"],
     default: "Pending",
   },
 });
+
+appointmentSchema.index(
+  { doctorId: 1, appointment_date: 1, timeSlot: 1 },
+  { unique: true }
+);
 
 export const Appointment = mongoose.model("Appointment", appointmentSchema);

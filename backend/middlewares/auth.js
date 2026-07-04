@@ -51,6 +51,34 @@ export const isPatientAuthenticated = catchAsyncErrors(
   }
 );
 
+// Middleware to authenticate doctor users
+export const isDoctorAuthenticated = catchAsyncErrors(
+  async (req, res, next) => {
+    const token = req.cookies.doctorToken;
+    if (!token) {
+      return next(new ErrorHandler("Doctor not authenticated! Please login first.", 401));
+    }
+
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+      req.user = await User.findById(decoded.id);
+
+      if (!req.user) {
+        return next(new ErrorHandler("User not found! Please login again.", 401));
+      }
+
+      if (req.user.role !== "Doctor") {
+        return next(
+          new ErrorHandler(`${req.user.role} not authorized for this resource!`, 403)
+        );
+      }
+      next();
+    } catch (error) {
+      return next(new ErrorHandler("Invalid or expired token! Please login again.", 401));
+    }
+  }
+);
+
 export const isAuthorized = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {

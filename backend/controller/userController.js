@@ -5,18 +5,16 @@ import { generateToken } from "../utils/jwtToken.js";
 import cloudinary from "cloudinary";
 
 export const patientRegister = catchAsyncErrors(async (req, res, next) => {
-  const { firstName, lastName, email, phone, nic, dob, gender, password } =
+  const { firstName, lastName, email, phone, aadhaar, dob, gender, password } =
     req.body;
-  
-  // Log the received data for debugging
-  console.log("Registration data received:", req.body);
-  
+
+
   if (
     !firstName ||
     !lastName ||
     !email ||
     !phone ||
-    !nic ||
+    !aadhaar ||
     !dob ||
     !gender ||
     !password
@@ -26,11 +24,11 @@ export const patientRegister = catchAsyncErrors(async (req, res, next) => {
     if (!lastName) missingFields.push("lastName");
     if (!email) missingFields.push("email");
     if (!phone) missingFields.push("phone");
-    if (!nic) missingFields.push("nic");
+    if (!aadhaar) missingFields.push("aadhaar");
     if (!dob) missingFields.push("dob");
     if (!gender) missingFields.push("gender");
     if (!password) missingFields.push("password");
-    
+
     return next(new ErrorHandler(`Please Fill Full Form! Missing fields: ${missingFields.join(", ")}`, 400));
   }
 
@@ -44,7 +42,7 @@ export const patientRegister = catchAsyncErrors(async (req, res, next) => {
     lastName,
     email,
     phone,
-    nic,
+    aadhaar,
     dob,
     gender,
     password,
@@ -86,14 +84,14 @@ export const login = catchAsyncErrors(async (req, res, next) => {
 
 
 export const addNewAdmin = catchAsyncErrors(async (req, res, next) => {
-  const { firstName, lastName, email, phone, nic, dob, gender, password } =
+  const { firstName, lastName, email, phone, aadhaar, dob, gender, password } =
     req.body;
   if (
     !firstName ||
     !lastName ||
     !email ||
     !phone ||
-    !nic ||
+    !aadhaar ||
     !dob ||
     !gender ||
     !password
@@ -111,7 +109,7 @@ export const addNewAdmin = catchAsyncErrors(async (req, res, next) => {
     lastName,
     email,
     phone,
-    nic,
+    aadhaar,
     dob,
     gender,
     password,
@@ -145,18 +143,19 @@ export const addNewDoctor = catchAsyncErrors(async (req, res, next) => {
     lastName,
     email,
     phone,
-    nic,
+    aadhaar,
     dob,
     gender,
     password,
     doctorDepartment,
+    yearsOfExperience,
   } = req.body;
   if (
     !firstName ||
     !lastName ||
     !email ||
     !phone ||
-    !nic ||
+    !aadhaar ||
     !dob ||
     !gender ||
     !password ||
@@ -173,7 +172,7 @@ export const addNewDoctor = catchAsyncErrors(async (req, res, next) => {
       new ErrorHandler("Doctor With This Email Already Exists!", 400)
     );
   }
-  const cloudinaryResponse = await cloudinary.uploader.upload(
+  const cloudinaryResponse = await cloudinary.v2.uploader.upload(
     docAvatar.tempFilePath
   );
   if (!cloudinaryResponse || cloudinaryResponse.error) {
@@ -195,12 +194,13 @@ export const addNewDoctor = catchAsyncErrors(async (req, res, next) => {
     lastName,
     email,
     phone,
-    nic,
+    aadhaar,
     dob,
     gender,
     password,
     role: "Doctor",
     doctorDepartment,
+    yearsOfExperience: yearsOfExperience ? Number(yearsOfExperience) : undefined,
     docAvatar: {
       public_id: cloudinaryResponse.public_id,
       url: cloudinaryResponse.secure_url,
@@ -217,6 +217,25 @@ export const addNewDoctor = catchAsyncErrors(async (req, res, next) => {
 
 
 
+
+export const deleteDoctor = catchAsyncErrors(async (req, res, next) => {
+  const { id } = req.params;
+  const doctor = await User.findById(id);
+  if (!doctor) {
+    return next(new ErrorHandler("Doctor Not Found!", 404));
+  }
+  if (doctor.role !== "Doctor") {
+    return next(new ErrorHandler("This user is not a doctor!", 400));
+  }
+  if (doctor.docAvatar?.public_id) {
+    await cloudinary.v2.uploader.destroy(doctor.docAvatar.public_id);
+  }
+  await doctor.deleteOne();
+  res.status(200).json({
+    success: true,
+    message: "Doctor Deleted Successfully!",
+  });
+});
 
 export const getAllDoctors = catchAsyncErrors(async (req, res, next) => {
   const doctors = await User.find({ role: "Doctor" });
@@ -236,13 +255,14 @@ export const getUserDetails = catchAsyncErrors(async (req, res, next) => {
 
 // Logout function for dashboard admin
 export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
+  const isProduction = process.env.NODE_ENV === "production";
   res
     .status(201)
     .cookie("adminToken", "", {
       httpOnly: true,
       expires: new Date(Date.now()),
-      secure: true,
-      sameSite: "None",
+      secure: isProduction,
+      sameSite: isProduction ? "None" : "Lax",
     })
     .json({
       success: true,
@@ -250,15 +270,71 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
     });
 });
 
+export const updatePatientProfile = catchAsyncErrors(async (req, res, next) => {
+  const { firstName, lastName, email, phone } = req.body;
+  const user = await User.findByIdAndUpdate(
+    req.user._id,
+    { firstName, lastName, email, phone },
+    { new: true, runValidators: true }
+  );
+  res.status(200).json({ success: true, message: "Profile Updated Successfully", user });
+});
+
+export const resetPassword = catchAsyncErrors(async (req, res, next) => {
+  const { email, aadhaar, newPassword } = req.body;
+  if (!email || !aadhaar || !newPassword) {
+    return next(new ErrorHandler("Please provide all fields!", 400));
+  }
+  const user = await User.findOne({ email, aadhaar, role: "Patient" }).select("+password");
+  if (!user) {
+    return next(new ErrorHandler("User not found or Aadhaar does not match!", 404));
+  }
+  user.password = newPassword;
+  await user.save();
+  res.status(200).json({ success: true, message: "Password reset successfully!" });
+});
+
+// Logout function for doctor portal
+export const logoutDoctor = catchAsyncErrors(async (req, res, next) => {
+  const isProduction = process.env.NODE_ENV === "production";
+  res
+    .status(201)
+    .cookie("doctorToken", "", {
+      httpOnly: true,
+      expires: new Date(Date.now()),
+      secure: isProduction,
+      sameSite: isProduction ? "None" : "Lax",
+    })
+    .json({
+      success: true,
+      message: "Doctor Logged Out Successfully.",
+    });
+});
+
+export const updateDoctorProfile = catchAsyncErrors(async (req, res, next) => {
+  const { phone, yearsOfExperience } = req.body;
+  const updateData = {};
+  if (phone !== undefined) updateData.phone = phone;
+  if (yearsOfExperience !== undefined) updateData.yearsOfExperience = Number(yearsOfExperience);
+
+  const user = await User.findByIdAndUpdate(
+    req.user._id,
+    updateData,
+    { new: true, runValidators: true }
+  );
+  res.status(200).json({ success: true, message: "Profile Updated Successfully", user });
+});
+
 // Logout function for frontend patient
 export const logoutPatient = catchAsyncErrors(async (req, res, next) => {
+  const isProduction = process.env.NODE_ENV === "production";
   res
     .status(201)
     .cookie("patientToken", "", {
       httpOnly: true,
       expires: new Date(Date.now()),
-      secure: true,
-      sameSite: "None",
+      secure: isProduction,
+      sameSite: isProduction ? "None" : "Lax",
     })
     .json({
       success: true,

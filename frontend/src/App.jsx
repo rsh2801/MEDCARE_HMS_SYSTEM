@@ -1,17 +1,47 @@
 import React, { useContext, useEffect } from "react";
-import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import Home from "./Pages/Home";
 import Appointment from "./Pages/Appointment";
 import AboutUs from "./Pages/AboutUs";
 import Register from "./Pages/Register";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import GradientBackground from "./components/GradientBackground";
+import SonnerToaster from "./components/SonnerToaster";
+import TopProgressBar from "./components/TopProgressBar";
+import ScrollToTop from "./components/ScrollToTop";
+import BottomNav from "./components/BottomNav";
 import axios from "axios";
 import { Context } from "./main";
 import Login from "./Pages/Login";
+import MyAppointments from "./Pages/MyAppointments";
+import OurDoctors from "./Pages/OurDoctors";
+import NotFound from "./Pages/NotFound";
+import Profile from "./Pages/Profile";
+import ForgotPassword from "./Pages/ForgotPassword";
+import Chatbot from "./components/Chatbot";
+
+const AnimatedRoutes = () => {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Home />} />
+        <Route path="/appointment" element={<Appointment />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/my-appointments" element={<MyAppointments />} />
+        <Route path="/doctors" element={<OurDoctors />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </AnimatePresence>
+  );
+};
+
 const App = () => {
   const { isAuthenticated, setIsAuthenticated, setUser } =
     useContext(Context);
@@ -34,21 +64,20 @@ const App = () => {
       }
     };
     fetchUser();
-  }, []); // Remove isAuthenticated from dependency array to prevent infinite loop
+  }, []);
 
   return (
     <>
       <Router>
+        <TopProgressBar />
+        <GradientBackground />
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/appointment" element={<Appointment />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
+        <AnimatedRoutes />
         <Footer />
-        <ToastContainer position="top-center" />
+        <ScrollToTop />
+        <BottomNav />
+        <Chatbot />
+        <SonnerToaster />
       </Router>
     </>
   );

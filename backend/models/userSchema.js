@@ -25,11 +25,11 @@ const userSchema = new mongoose.Schema({
     minLength: [10, "Phone Number Must Contain Exact 10 Digits!"],
     maxLength: [10, "Phone Number Must Contain Exact 10 Digits!"],
   },
-  nic: {
+  aadhaar: {
     type: String,
-    required: [true, "NIC Is Required!"],
-    minLength: [13, "NIC Must Contain Only 13 Digits!"],
-    maxLength: [13, "NIC Must Contain Only 13 Digits!"],
+    required: [true, "Aadhaar Is Required!"],
+    minLength: [12, "Aadhaar Must Contain Exact 12 Digits!"],
+    maxLength: [12, "Aadhaar Must Contain Exact 12 Digits!"],
   },
   dob: {
     type: Date,
@@ -53,6 +53,10 @@ const userSchema = new mongoose.Schema({
   },
   doctorDepartment:{
     type: String,
+  },
+  yearsOfExperience: {
+    type: Number,
+    min: [0, "Years of experience cannot be negative!"],
   },
   docAvatar: {
     public_id: String,

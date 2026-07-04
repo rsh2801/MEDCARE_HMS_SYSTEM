@@ -1,7 +1,10 @@
 export const generateToken = (user, message, statusCode, res) => {
   const token = user.generateJsonWebToken();
   // Determine the cookie name based on the user's role
-  const cookieName = user.role === 'Admin' ? 'adminToken' : 'patientToken';
+  const cookieName = user.role === 'Admin' ? 'adminToken'
+                   : user.role === 'Doctor' ? 'doctorToken'
+                   : 'patientToken';
+  const isProduction = process.env.NODE_ENV === "production";
 
   res.status(statusCode)
     .cookie(cookieName, token, {
@@ -9,8 +12,8 @@ export const generateToken = (user, message, statusCode, res) => {
         Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
       ),
       httpOnly: true,
-      secure: true,
-      sameSite: "None"
+      secure: isProduction,
+      sameSite: isProduction ? "None" : "Lax",
     })
     .json({
       success: true,
