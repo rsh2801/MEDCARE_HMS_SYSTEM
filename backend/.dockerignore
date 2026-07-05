@@ -20,3 +20,5 @@ yarn-error.log*
 .nuxt
 out
 .cache
+backend/config.env
+backend/config/config.env

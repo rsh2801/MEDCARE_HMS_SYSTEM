@@ -3,6 +3,7 @@ npm-debug.log*
 .git
 .gitignore
 .env.local
+.env
 .env.*.local
 .vscode
 .idea
