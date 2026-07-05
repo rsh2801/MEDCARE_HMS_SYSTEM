@@ -47,7 +47,7 @@ const AppointmentForm = () => {
     const fetchDoctors = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/v1/user/doctors",
+            `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/doctors`,
           { withCredentials: true }
         );
         setDoctors(data.doctors);
@@ -76,7 +76,7 @@ const AppointmentForm = () => {
       setSlotsLoading(true);
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/v1/appointment/available-slots?doctorId=${selectedDoctorId}&date=${appointmentDate}`,
+            `${import.meta.env.VITE_BACKEND_URL}/api/v1/appointment/available-slots?doctorId=${selectedDoctorId}&date=${appointmentDate}`,
           { withCredentials: true }
         );
         setSlotsData(data);
@@ -103,7 +103,7 @@ const AppointmentForm = () => {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/appointment/post",
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/appointment/post`,
         {
           firstName, lastName, email, phone, aadhaar, dob, gender,
           appointment_date: appointmentDate, department,

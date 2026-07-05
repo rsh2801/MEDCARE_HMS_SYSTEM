@@ -32,7 +32,7 @@ const Dashboard = () => {
     const fetchStats = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/v1/appointment/doctor/stats",
+            `${import.meta.env.VITE_BACKEND_URL}/api/v1/appointment/doctor/stats`,
           { withCredentials: true }
         );
         setStats(data);
@@ -48,14 +48,14 @@ const Dashboard = () => {
   const handleStatusUpdate = async (appointmentId, status) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:5000/api/v1/appointment/doctor/status/${appointmentId}`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/appointment/doctor/status/${appointmentId}`,
         { status },
         { withCredentials: true }
       );
       toast.success(data.message);
       // Refresh stats
       const res = await axios.get(
-        "http://localhost:5000/api/v1/appointment/doctor/stats",
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/appointment/doctor/stats`,
         { withCredentials: true }
       );
       setStats(res.data);

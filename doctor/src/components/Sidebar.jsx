@@ -30,7 +30,7 @@ const Sidebar = () => {
 
   const handleLogout = async () => {
     await axios
-      .get("http://localhost:5000/api/v1/user/doctor/logout", {
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/doctor/logout`, {
         withCredentials: true,
       })
       .then((res) => {

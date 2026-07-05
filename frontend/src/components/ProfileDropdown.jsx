@@ -35,7 +35,7 @@ const ProfileDropdown = () => {
   const handleLogout = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/v1/user/patient/logout",
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/patient/logout`,
         { withCredentials: true }
       );
       toast.success(res.data.message);

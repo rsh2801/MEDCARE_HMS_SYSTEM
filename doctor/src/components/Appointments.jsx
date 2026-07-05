@@ -59,7 +59,7 @@ const Appointments = () => {
       }
 
       const { data } = await axios.get(
-        `http://localhost:5000/api/v1/appointment/doctor/all?${params.toString()}`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/appointment/doctor/all?${params.toString()}`,
         { withCredentials: true }
       );
       setAppointments(data.appointments);
@@ -86,7 +86,7 @@ const Appointments = () => {
   const handleStatusUpdate = async (appointmentId, status) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:5000/api/v1/appointment/doctor/status/${appointmentId}`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/appointment/doctor/status/${appointmentId}`,
         { status },
         { withCredentials: true }
       );

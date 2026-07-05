@@ -39,7 +39,7 @@ const Doctors = () => {
     const fetchDoctors = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/v1/user/doctors",
+            `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/doctors`,
           { withCredentials: true }
         );
         setDoctors(data.doctors);
@@ -55,7 +55,7 @@ const Doctors = () => {
   const handleDeleteDoctor = async (doctorId) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:5000/api/v1/user/doctor/${doctorId}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/doctor/${doctorId}`,
         { withCredentials: true }
       );
       setDoctors((prev) => prev.filter((doc) => doc._id !== doctorId));

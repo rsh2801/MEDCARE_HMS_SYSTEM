@@ -60,7 +60,7 @@ const Chatbot = () => {
       }
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/chatbot/ask",
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/chatbot/ask`,
         { message: trimmed, history }
       );
 

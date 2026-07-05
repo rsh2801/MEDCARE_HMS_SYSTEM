@@ -29,7 +29,7 @@ const Profile = () => {
     setSaving(true);
     try {
       const { data } = await axios.put(
-        "http://localhost:5000/api/v1/user/doctor/profile",
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/doctor/profile`,
         { phone, yearsOfExperience },
         { withCredentials: true }
       );

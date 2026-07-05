@@ -32,7 +32,7 @@ const Sidebar = () => {
 
   const handleLogout = async () => {
     await axios
-      .get("http://localhost:5000/api/v1/user/admin/logout", {
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/admin/logout`, {
         withCredentials: true,
       })
       .then((res) => {

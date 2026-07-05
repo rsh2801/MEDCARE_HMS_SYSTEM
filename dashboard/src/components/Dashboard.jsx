@@ -47,8 +47,8 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       const [apptRes, docRes] = await Promise.allSettled([
-        axios.get("http://localhost:5000/api/v1/appointment/getall", { withCredentials: true }),
-        axios.get("http://localhost:5000/api/v1/user/doctors", { withCredentials: true }),
+        axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/appointment/getall`, { withCredentials: true }),
+        axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/user/doctors`, { withCredentials: true }),
       ]);
       setAppointments(apptRes.status === "fulfilled" ? apptRes.value.data.appointments : []);
       setDoctors(docRes.status === "fulfilled" ? docRes.value.data.doctors : []);
@@ -60,7 +60,7 @@ const Dashboard = () => {
   const handleUpdateStatus = async (appointmentId, status) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:5000/api/v1/appointment/update/${appointmentId}`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/appointment/update/${appointmentId}`,
         { status },
         { withCredentials: true }
       );
@@ -78,7 +78,7 @@ const Dashboard = () => {
   const handleDelete = async (appointmentId) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:5000/api/v1/appointment/delete/${appointmentId}`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/appointment/delete/${appointmentId}`,
         { withCredentials: true }
       );
       setAppointments((prev) => {
