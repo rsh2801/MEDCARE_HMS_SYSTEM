@@ -17,45 +17,6 @@ A full-stack hospital management system built with the MERN stack featuring thre
 
 ---
 
-## Screenshots
-
-### Patient Portal
-
-| Home Page | Appointment Booking |
-|-----------|-------------------|
-| ![Home Page](screenshots/home.png) | ![Appointment](screenshots/appointment.png) |
-
-| AI Symptom Checker | Our Doctors |
-|-------------------|-------------|
-| ![Chatbot](screenshots/chatbot.png) | ![Doctors](screenshots/doctors.png) |
-
-| My Appointments | Profile |
-|----------------|---------|
-| ![My Appointments](screenshots/my-appointments.png) | ![Profile](screenshots/profile.png) |
-
-### Admin Dashboard
-
-| Dashboard Overview | Manage Doctors |
-|-------------------|----------------|
-| ![Dashboard](screenshots/admin-dashboard.png) | ![Doctors](screenshots/admin-doctors.png) |
-
-| Add New Doctor | Messages |
-|---------------|----------|
-| ![Add Doctor](screenshots/add-doctor.png) | ![Messages](screenshots/messages.png) |
-
-### Doctor Portal
-
-| Doctor Dashboard | Appointments |
-|-----------------|-------------|
-| ![Doctor Dashboard](screenshots/doctor-dashboard.png) | ![Doctor Appointments](screenshots/doctor-appointments.png) |
-
-### Dark Mode
-
-| Patient (Dark) | Admin (Dark) |
-|---------------|-------------|
-| ![Dark Mode](screenshots/dark-mode.png) | ![Admin Dark](screenshots/admin-dark.png) |
-
-> **Note:** To add screenshots, create a `screenshots/` folder in the project root and save images with the filenames shown above.
 
 ---
 
